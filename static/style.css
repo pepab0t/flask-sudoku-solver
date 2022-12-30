@@ -1,0 +1,125 @@
+/* simple reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* general styles */
+.background {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+/* project styles */
+
+.background {
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.game {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2em;
+}
+
+.title {
+    font-size: 50px;
+    color: white;
+    text-transform: uppercase;
+    padding-bottom: 30px;
+}
+
+.gameboard {
+    display: grid;
+    padding: 1.2em;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5em;
+}
+
+.gameboard:nth-child(2) div {
+    background-color: black;
+}
+
+
+.board-section {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: .3em;
+    max-width: 120px;
+}
+
+.number {
+    width: 35px;
+    height: 50px;
+    background-color: lightgray;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    opacity: 0.6;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+}
+
+.footer-buttons {
+    display: flex;
+}
+
+.button {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: black;
+    background: none;
+    cursor: pointer;
+    padding: 15px 40px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    display: flex;
+    column-gap: 0.5em;
+    align-items: center;
+  }
+
+  .button:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  /* Button 1 */
+  .button-1 {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+  /* Button 1a */
+  .button-1:hover,
+  .button-1:active {
+    color: #0e83cd;
+    background: #fff;
+  }

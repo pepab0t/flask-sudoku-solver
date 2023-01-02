@@ -66,32 +66,6 @@ class Board:
         return True
 
     def solve(self):
-        current = {}
-        solved_id = []
-        for i, j in self.empty:
-            current[f"{i}{j}"] = 1
-
-        i, j = self.empty.pop()
-        while len(self.empty) > 0:
-            solving = current[f"{i}{j}"]
-            if solving == 10:
-                current[f"{i}{j}"] = 1
-                self.empty.append((i, j))
-                self.data[i, j] = 0
-                i, j = solved_id.pop()
-                current[f"{i}{j}"] += 1
-                continue
-
-            if self.validate_position(i, j, solving):
-                self.data[i, j] = solving
-                solved_id.append((i, j))
-                i, j = self.empty.pop()
-            else:
-                current[f"{i}{j}"] += 1
-
-        return self.data
-
-    def solve2(self):
         """Backtracking algorithm"""
         solved_id = []
 
@@ -142,5 +116,5 @@ board = np.array([
 
 if __name__ == "__main__":
     b = Board(board)
-    out = b.solve2()
+    out = b.solve()
     print(out)

@@ -1,52 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Erica+One&family=Montserrat:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Erica+One&family=Montserrat:ital,wght@0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <title>Sudoku</title>
-</head>
-<body>
+  </head>
+  <body>
     <main class="background">
-        <h1 class="title">Sudoku</h1>
-        <div class="head">
-            <div class="buttons">
-                <button class="button button-1 start"><i class="ri-play-circle-line ri-lg"></i>
-                    Start</button>
-                    <button class="button button-1 start"><i class="ri-restart-fill ri-lg"></i>Restart</button>
-            </div>
+      <h1 class="title">Sudoku</h1>
+      <div class="head">
+        <div class="buttons">
+          <button class="button button-1 start" >
+            <i class="ri-play-circle-line ri-lg"></i> Start
+          </button>
+          <button class="button button-1 start">
+            <a href="{{ url_for('home') }}"><i class="ri-restart-fill ri-lg"></i>Restart </a>
+          </button>
         </div>
-        <div class="game">
-            <form class="gameboard" method="POST" action="{{ url_for('home') }}">
-               <div>
-                <!-- {% f %} -->
+      </div>
+
+    {% set rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] %}
+    {% set cols = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] %}
+    {% set mapping = {
+            'A': '0',
+            'B': '1',
+            'C': '2',
+            'D': '3',
+            'E': '4',
+            'F': '5',
+            'G': '6',
+            'H': '7',
+            'I': '8',
+      } %}
+
+      <div class="game">
+        <form method="POST" action="{{ url_for('home') }}">
+          <div class="gameboard">
+            {% for i in range(9) %}
                 <div class="board-section" action="">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
-                    <input class="number" max-length="1" type="text">
+                    {% for r in rows[3*(i//3): 3*(i//3) + 3] %}
+                        {% for c in cols[3*(i%3): 3*(i%3) + 3] %}
+                            {% if board is not none %}
+                                <input class="number" name="{{r}}{{c}}" max-length="2" type="text" value="{{ board[mapping[r]|int][c|int -1]}}"/>
+                            {% else %}
+                                <input class="number" name="{{r}}{{c}}" max-length="2" type="text" />
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 </div>
+            {% endfor %}
+          </div>
+          <div class="footer">
+            <div class="footer-buttons">
+              <div class="time-couner">
+                <i class="ri-timer-line ri-lg"></i> Time counter
+              </div>
+              <button type="submit" class="button button-1 finish">
+                <i class="ri-checkbox-circle-line ri-lg"></i> Complete
+              </button>
             </div>
-                <div class="footer">
-                    <div class="footer-buttons">
-                        <div class="time-couner"><i class="ri-timer-line ri-lg"></i>
-                            Time counter</div>
-                        <button type="submit" class="button button-1 finish"><i class="ri-checkbox-circle-line ri-lg"></i>
-                            Complete</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+          </div>
+        </form>
+      </div>
     </main>
-</body>
+  </body>
 </html>

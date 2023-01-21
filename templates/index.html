@@ -19,56 +19,50 @@
   </head>
   <body>
     <main class="background">
-      <h1 class="title">Sudoku</h1>
-      <div class="head">
-        <div class="buttons">
-          <button class="button button-1 start" >
-            <i class="ri-play-circle-line ri-lg"></i> Start
-          </button>
-          <button class="button button-1 start">
-            <a href="{{ url_for('home') }}"><i class="ri-restart-fill ri-lg"></i>Restart </a>
-          </button>
-        </div>
-      </div>
+      <h1 class="title">Sudoku Solver</h1>
 
-    {% set rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] %}
-    {% set cols = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] %}
-    {% set mapping = {
-            'A': '0',
-            'B': '1',
-            'C': '2',
-            'D': '3',
-            'E': '4',
-            'F': '5',
-            'G': '6',
-            'H': '7',
-            'I': '8',
-      } %}
+      <a href="{{ url_for('home') }}"
+        <button  class="button button-1 start">Example</button>
+      </a>
+
+      {% set rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] %} {% set cols
+      = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] %} {% set mapping = { 'A':
+      '0', 'B': '1', 'C': '2', 'D': '3', 'E': '4', 'F': '5', 'G': '6', 'H': '7',
+      'I': '8', } %}
 
       <div class="game">
         <form method="POST" action="{{ url_for('home') }}">
           <div class="gameboard">
             {% for i in range(9) %}
-                <div class="board-section" action="">
-                    {% for r in rows[3*(i//3): 3*(i//3) + 3] %}
-                        {% for c in cols[3*(i%3): 3*(i%3) + 3] %}
-                            {% if board is not none %}
-                                <input class="number" name="{{r}}{{c}}" max-length="2" type="text" value="{{ board[mapping[r]|int][c|int -1]}}"/>
-                            {% else %}
-                                <input class="number" name="{{r}}{{c}}" max-length="2" type="text" />
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                </div>
+            <div class="board-section" action="">
+              {% for r in rows[3*(i//3): 3*(i//3) + 3] %} {% for c in
+              cols[3*(i%3): 3*(i%3) + 3] %} {% if board is not none %}
+              <input
+                class="number"
+                name="{{r}}{{c}}"
+                max-length="2"
+                type="text"
+                value="{{ board[mapping[r]|int][c|int -1]}}"
+              />
+              {% else %}
+              <input
+                class="number"
+                name="{{r}}{{c}}"
+                max-length="2"
+                type="text"
+              />
+              {% endif %} {% endfor %} {% endfor %}
+            </div>
             {% endfor %}
           </div>
           <div class="footer">
             <div class="footer-buttons">
-              <div class="time-couner">
-                <i class="ri-timer-line ri-lg"></i> Time counter
-              </div>
+              <a href="{{ url_for('home') }}"
+                <button  class="button button-1 start">
+                  <i class="ri-restart-fill ri-lg"></i>Clear</button>
+              </a>
               <button type="submit" class="button button-1 finish">
-                <i class="ri-checkbox-circle-line ri-lg"></i> Complete
+                <i class="ri-checkbox-circle-line ri-lg"></i> Solve
               </button>
             </div>
           </div>
